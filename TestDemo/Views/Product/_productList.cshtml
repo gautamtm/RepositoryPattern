@@ -1,0 +1,23 @@
+﻿@model List<TestDemo.ViewModels.ProductViewModel>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Cost Price</th>
+            <th>Sales Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductID</td>
+                <td><a href="@item.SEName" target="_blank">@item.Name</a></td>
+                <td>@item.CostPrice</td>
+                <td>@item.SalesPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
