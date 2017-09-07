@@ -1,0 +1,10 @@
+﻿@model List<TestDemo.ViewModels.ProductViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<div class="container">
+    <h4 class="center-block">Product List</h4>
+    @Html.Partial("~/Views/Product/_productList.cshtml")
+</div>

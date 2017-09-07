@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+}
+
+<h4>@ViewBag.Notification</h4>
+
+ 
+@Html.Action("GetNotificatoinView","Home")
+
+@*<div class="container" ng-app="myApp">
+    <div ng-controller="indexCtrl">
+        <input type="text" id="ng-id" ng-model="msg" />
+        <input type="button" id="ang-btn" ng-click="submitMsg()" value="Ng-Send" />
+        <label ng-model="lblMsg">{{lblMsg}}</label>
+    </div>
+</div>*@
+
+<div>
+    <input type="text" id="noticeMsg" />
+    <input type="button" id="sendNotification" value="Notify" />
+    
+</div>
+<br />
+<div class="container">
+    <input type="text" id="message" />
+    <input type="button" id="sendMessage" value="Send" />
+    <input type="hidden" id="displayname" />
+    <ul id="discussion"></ul>
+</div>
+@*<script src="~/TypeScript/check.js"></script>*@
+<script src="~/TypeScript/check.js"></script>
+<script>
+        //script for signal R communication
+        //start of signal R variable
+        var signalR = (function () {
+            var chat = $.connection.chatHub;
+            function startConnection() {
+                $.connection.hub.start();
+            }
+
+            function addMessage() {
+                chat.client.addMessage = function (msg) {
+                    $('#discussion').append('<li>' + msg + '</li>');
+                }
+            }
+
+            function addNotice() {
+                chat.client.AddNotice = function (from, subject, notice) {
+                    var notice = GetHtml(from, subject, notice);
+                    $('.notificationMsg').html('');
+                    $('.notificationMsg').append(notice);
+                };
+            }
+
+            function sendMessage() {
+                chat.server.send($('#message').val());
+                $('#message').focus('');
+            }
+
+            function pushNotification() {
+                chat.server.pushNotification('Server', 'Signal R', $('#noticeMsg').val());
+            }
+
+            function GetHtml(from, subject, notice) {
+                var html = '<h4>Subject: ' + subject + '</h4>';
+                html += '<p>' + notice + '</p>';
+                html += '<p> Thank you ' + from + '</p>';
+                return html;
+            }
+
+            return {
+                startConnection: startConnection,
+                addMessage: addMessage,
+                addNotice: addNotice,
+                sendMessage: sendMessage,
+                sendNotification: sendMessage,
+                pushNotification: pushNotification
+            };
+        })();
+        //end of signal R variable
+
+        $(document).ready(function () {
+            var app = new Demo.Employee;
+            var response = app.replyToText("test");
+            app.ajaxRequest("/Home/GetView", "GET", { typeScript: "ts"});
+            console.log(response);
+
+            signalR.startConnection();
+            signalR.addMessage();
+            signalR.addNotice();
+        });
+
+        $('#sendMessage').on('click',function () {
+            signalR.sendMessage();
+        });
+
+        //to send notification
+        $('#sendNotification').on('click',function () {
+            signalR.pushNotification();
+        });
+
+        //end of signal R communication
+    </script>
+
+@*<script>
+    angular.module('myApp', []).controller('indexCtrl', ['$scope', function ($scope) {
+        var chat = $.connection.chatHub;
+        $.connection.hub.start();
+        $scope.submitMsg = function () {
+            chat.server.send($scope.msg);
+            chat.client.AddMessage = function (from) {
+                console.log(from);
+                //var notice = GetHtml(from, subject, notice);
+                $scope.lblMsg = "Response from angular: " + from;
+            };
+        }
+    }]);
+</script>*@
+
