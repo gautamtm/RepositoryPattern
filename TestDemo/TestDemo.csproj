@@ -196,6 +196,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{594f6e4f-d61e-4de0-808e-a9d8f386d303}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{b8116a77-b7e3-480e-a2e1-178ea9f32fcc}</Project>
       <Name>Service</Name>

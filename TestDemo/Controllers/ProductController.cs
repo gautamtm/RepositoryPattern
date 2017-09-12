@@ -26,6 +26,8 @@ namespace TestDemo.Controllers
         {
             try
             {
+                var check = Core.Helper.HtmlHelper.ConvertPlainTextToHtml("hello");
+                var link = Core.Helper.ResolveLinksHelper.FormatText("https://github.com/aspnetboilerplate/aspnetboilerplate/tree/dev/src");
                 var list = new List<ProductViewModel>();
                 Random price = new Random();
                 var products = new[] { "Shoes", "Shirt", "Half-Pants", "Sun Glass", "Headphone", "Laptop", "Desktop", "Mobile", "Slipper" };

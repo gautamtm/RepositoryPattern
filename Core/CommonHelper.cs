@@ -43,6 +43,8 @@ namespace Core
         /// <returns>true if the string is a valid IpAddress and false if it's not</returns>
         public static bool IsValidIpAddress(string ipAddress)
         {
+            if (string.IsNullOrWhiteSpace(ipAddress))
+                return false;
             IPAddress ip;
             return IPAddress.TryParse(ipAddress, out ip);
         }
