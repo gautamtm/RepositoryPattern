@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿//using Rhino.Mocks;
 using Moq;
+=======
+﻿using Moq;
+>>>>>>> a227b1e6115d7cd76ed6043e6d4d842b471c9278
 using Service.Chat;
 using Service.Product;
 using System;
@@ -14,6 +18,7 @@ namespace Test.Test
 {
     public class ProductTest
     {
+<<<<<<< HEAD
         #region Field
         private Mock<IProductService> mock;
         private IProductService _productService;
@@ -28,10 +33,20 @@ namespace Test.Test
         #endregion
 
         [Fact]
+=======
+        //private IProductService _productService;
+        public ProductTest()
+        {
+            
+        }
+
+        [Theory]
+>>>>>>> a227b1e6115d7cd76ed6043e6d4d842b471c9278
         public void GetProductList()
         {
             try
             {
+<<<<<<< HEAD
                 //var ps = new Mock<IProductService>();
                 var model = new[] { new Service.ServiceModel.Product { ProductID = 1, Name = "Static Check Shirt" } };
                 mock.Setup(m => m.GetProductList()).Returns(model);
@@ -47,6 +62,16 @@ namespace Test.Test
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+=======
+                var ps = new Mock<IProductService>();
+                var serviceModel = new[] { new Service.ServiceModel.Product { ProductID = 1 } };
+                ps.Setup(m => m.GetProductList()).Returns(serviceModel);
+            
+            }
+            catch (Exception)
+            {
+                
+>>>>>>> a227b1e6115d7cd76ed6043e6d4d842b471c9278
                 throw;
             }
         }
